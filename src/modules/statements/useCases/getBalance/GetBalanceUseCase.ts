@@ -14,6 +14,7 @@ interface IResponse {
   balance: number;
 }
 
+
 @injectable()
 export class GetBalanceUseCase {
   constructor(

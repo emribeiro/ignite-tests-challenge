@@ -13,6 +13,7 @@ import { User } from '../../users/entities/User';
 export enum OperationType {
   DEPOSIT = 'deposit',
   WITHDRAW = 'withdraw',
+  TRANSFER = 'transfer'
 }
 
 @Entity('statements')
@@ -23,6 +24,12 @@ export class Statement {
   @Column('uuid')
   user_id: string;
 
+  @Column()
+  sender_id?: string;
+  
+  @Column()
+  receiver_id?: string;
+
   @ManyToOne(() => User, user => user.statement)
   @JoinColumn({ name: 'user_id' })
   user: User;
@@ -30,7 +37,7 @@ export class Statement {
   @Column()
   description: string;
 
-  @Column('decimal', { precision: 5, scale: 2 })
+  @Column()
   amount: number;
 
   @Column({ type: 'enum', enum: OperationType })
